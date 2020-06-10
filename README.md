@@ -55,7 +55,7 @@ def some_func_that_can_raise_an_exception():
 
 Here's what a telegram message from an example above looks like:
 
-![](./message_example.png)
+<img src="./message_example.png" width="400">
 
 ## Sending messages
 You can also use the `Alerter` as a simple way to send messages to Telegram:
