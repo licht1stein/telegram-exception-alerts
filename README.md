@@ -5,6 +5,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/telegram-exception-alerts)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/telegram-exception-alerts)
 
+A very lightweight library for sending exception details to Telegram using a decorator.
 
 ## Installation
 
