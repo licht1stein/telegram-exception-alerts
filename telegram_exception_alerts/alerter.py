@@ -56,6 +56,7 @@ class Alerter:
         """
         Telegram exception alert decorator. Sends exception details and traceback to self.chat_id and re-raises the exception
         """
+
         @wraps(func)
         def inner(*args, **kwargs):
             try:
@@ -68,3 +69,6 @@ class Alerter:
                 raise
 
         return inner
+
+    def __call__(self, func):
+        return self.exception_alert(func)

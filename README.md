@@ -27,9 +27,9 @@ that if you want to send notification to a channel you need to prepend that `cha
 ```python
 from telegram_exception_alerts import Alerter
 
-alerter = Alerter(bot_token='YOUR_BOT_TOKEN', chat_id='YOUR_CHAT_ID')
+tg_alert = Alerter(bot_token='YOUR_BOT_TOKEN', chat_id='YOUR_CHAT_ID')
 
-@alerter.exception_alert
+@tg_alert
 def some_func_that_can_raise_an_exception():
     raise RuntimeError('this is an exception')
 ```
@@ -45,9 +45,9 @@ because it will make sure you're not committing sensitive information to the rep
 ```python
 from telegram_exception_alerts import Alerter
 
-alerter = Alerter.from_environment()
+tg_alert = Alerter.from_environment()
 
-@alerter.exception_alert
+@tg_alert
 def some_func_that_can_raise_an_exception():
     raise RuntimeError('this is an exception')
 ```
@@ -58,9 +58,9 @@ You can also use the `Alerter` as a simple way to send messages to Telegram:
 ```python
 from telegram_exception_alerts import Alerter
 
-alerter = Alerter.from_environment()
+tg_alert = Alerter.from_environment()
 
-alerter.send_message(chat_id=111222333, text='Message text')
+tg_alert.send_message(chat_id=111222333, text='Message text')
 ```
 
 For real bot programming I highly recommend the excellent [python-telegram-bot](https://python-telegram-bot.org/) library.
