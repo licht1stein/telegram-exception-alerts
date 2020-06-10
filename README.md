@@ -23,6 +23,9 @@ After you initialize the alerter instance you can attach the decorator to any fu
 raises an exception information will be send to the chat specified in `chat_id` (don't forget 
 that if you want to send notification to a channel you need to prepend that `chat_id` with `-100`).
 
+Here's what a notification from an example below looks like:
+![](./message_example.png)
+
 ### Normal initialization
 
 ```python
