@@ -6,5 +6,5 @@ import pytest
 @pytest.fixture
 def notifier():
     return Alerter(
-        bot_token="foo", chat_id=11111
+        bot_token="YOUR_TOKEN", chat_id=1111111
     )
