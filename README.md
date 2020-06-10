@@ -62,3 +62,5 @@ alerter = Alerter.from_environment()
 
 alerter.send_message(chat_id=111222333, text='Message text')
 ```
+
+For real bot programming I highly recommend the excellent [python-telegram-bot](https://python-telegram-bot.org/) library.
