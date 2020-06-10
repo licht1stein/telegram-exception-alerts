@@ -1,6 +1,9 @@
 ![](https://telegram.org/img/t_logo.svg?1)
 # Telegram Exception Alerts
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![PyPI](https://img.shields.io/pypi/v/telegram-exception-alerts)](https://pypi.org/project/telegram-exception-alerts/)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/telegram-exception-alerts)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/telegram-exception-alerts)
 
 
 ## Installation
