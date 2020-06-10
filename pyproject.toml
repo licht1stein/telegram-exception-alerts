@@ -2,7 +2,7 @@
 name = "telegram_exception_alerts"
 version = "0.1.0"
 description = ""
-authors = ["https://github.com/licht1stein"]
+authors = ["licht1stein <mb@blaster.ai>"]
 homepage = "https://github.com/licht1stein/telegram-exception-alerts"
 readme = 'README.md'
 
