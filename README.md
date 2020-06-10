@@ -54,6 +54,7 @@ def some_func_that_can_raise_an_exception():
 ```
 
 Here's what a telegram message from an example above looks like:
+
 ![](./message_example.png)
 
 ## Sending messages
