@@ -57,7 +57,7 @@ Here's what a telegram message from an example above looks like:
 
 ![](./message_example.png | width=100)
 
-<img src="./message_example.png" width="60%>
+<img src="./message_example.png" width="60%">
 
 ## Sending messages
 You can also use the `Alerter` as a simple way to send messages to Telegram:
