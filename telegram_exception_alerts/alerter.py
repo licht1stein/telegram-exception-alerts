@@ -62,9 +62,9 @@ class Alerter:
             try:
                 return func(*args, **kwargs)
             except BaseException as e:
-                text = f"<b>{type(e).__name__}('{e}')</b> in <u>{func.__name__}</u> from <u>{func.__module__}</u>\n\n<pre>Traceback {traceback.format_exc()}</pre>"
+                text = f"<b>{type(e).__name__}('{e}')</b> in <u>{func.__name__}</u> from <u>{func.__module__}</u>\n\n<pre>{traceback.format_exc()}</pre>"
 
-                sent = self.send_message(
+                self.send_message(
                     self.chat_id,
                     text=text,
                     parse_mode='HTML'
