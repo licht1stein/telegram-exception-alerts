@@ -1,10 +1,10 @@
-from telegram_exception_alerts import TelegramNotifier
+from telegram_exception_alerts import Alerter
 
 import pytest
 
 
 @pytest.fixture
 def notifier():
-    return TelegramNotifier(
-        bot_token="419870734:AAEijbQFv0irstDqVcf01W7zz2RjenE4o8s", chat_id=22039771
+    return Alerter(
+        bot_token="foo", chat_id=11111
     )
