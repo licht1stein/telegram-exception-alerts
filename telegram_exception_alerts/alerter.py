@@ -10,6 +10,9 @@ import requests
 
 @attr.s
 class Alerter:
+    """
+    Alerter class for sending telegram messages and decorating functions for alerts.
+    """
     bot_token: str = attr.ib(repr=False)
     chat_id: int = attr.ib()
     base_url: str = attr.ib(init=False, repr=False)
@@ -31,13 +34,28 @@ class Alerter:
 
         return cls(bot_token=token, chat_id=int(chat_id))
 
-    def send_message(self, chat_id: int, *, text: str, parse_mode: str = None):
+    def send_message(self, chat_id: int, *, text: str, parse_mode: str = None, disable_web_page_preview: bool = True,
+                     disable_notification: bool = False) -> requests.Response:
+        """
+        Sends a telegram message to `chat_id`. All params according to https://core.telegram.org/bots/api#sendmessage
+
+        :param chat_id: telegram chat id to send to
+        :param text: message text
+        :param parse_mode: None, 'MARKDOWN' or 'HTML'
+        :param disable_web_page_preview: no link preview
+        :param disable_notification: send silently
+        :return: requests.Response
+        """
         return requests.post(
             self.base_url + "/sendMessage",
-            params={"chat_id": chat_id, "text": text, "parse_mode": parse_mode},
+            params={"chat_id": chat_id, "text": text, "parse_mode": parse_mode,
+                    'disable_web_page_preview': disable_web_page_preview, 'disable_notification': disable_notification},
         )
 
     def exception_alert(self, func):
+        """
+        Telegram exception alert decorator. Sends exception details and traceback to self.chat_id and re-raises the exception
+        """
         @wraps(func)
         def inner(*args, **kwargs):
             try:
