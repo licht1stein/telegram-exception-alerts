@@ -51,3 +51,14 @@ alerter = Alerter.from_environment()
 def some_func_that_can_raise_an_exception():
     raise RuntimeError('this is an exception')
 ```
+
+## Sending message
+You can also use the alerter as a simple way to send messages to Telegram:
+
+```python
+from telegram_exception_alerts import Alerter
+
+alerter = Alerter.from_environment()
+
+alerter.send_message(chat_id=111222333, text='Message text')
+```
