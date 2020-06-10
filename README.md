@@ -53,7 +53,7 @@ def some_func_that_can_raise_an_exception():
 ```
 
 ## Sending messages
-You can also use the alerter as a simple way to send messages to Telegram:
+You can also use the `Alerter` as a simple way to send messages to Telegram:
 
 ```python
 from telegram_exception_alerts import Alerter
