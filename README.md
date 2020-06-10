@@ -6,11 +6,11 @@
 ## Installation
 
 ```bash
-pip install telegram_exception_alerts
+pip install telegram-exception-alerts
 ```
 or
 ```bash
-poetry add telegram_exception_alerts
+poetry add telegram-exception-alerts
 ```
 
 ## Usage
