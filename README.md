@@ -19,6 +19,8 @@ After you initialize the alerter instance you can attach the decorator to any fu
 raises an exception information will be send to the chat specified in `chat_id` (don't forget 
 that if you want to send notification to a channel you need to prepend that `chat_id` with `-100`).
 
+### Normal initialization
+
 ```python
 from telegram_exception_alerts import Alerter
 
@@ -29,7 +31,10 @@ def some_func_that_can_raise_an_exception():
     raise RuntimeError('this is an exception')
 ```
 
-You can also initialize the alerter from environment variables:
+### Initialization from environment (recommended)
+
+You can also initialize the alerter from environment variables. **This is the recommended way**
+because it will make sure you're not committing sensitive information to the repo.
 
 * `ALERT_BOT_TOKEN` - your bot token
 * `ALERT_CHAT_ID` - your chat id to receive notifications
