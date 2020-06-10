@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "telegram_exception_alerts"
+version = "0.1.0"
+description = ""
+authors = ["https://github.com/licht1stein"]
+homepage = "https://github.com/licht1stein/telegram-exception-alerts"
+readme = 'README.md'
+
+[tool.poetry.dependencies]
+python = "^3.7"
+attrs = "^19.3.0"
+requests = "^2.23.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^19.10b0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
