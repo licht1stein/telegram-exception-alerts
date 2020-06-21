@@ -13,6 +13,7 @@ class Alerter:
     """
     Alerter class for sending telegram messages and decorating functions for alerts.
     """
+
     bot_token: str = attr.ib(repr=False)
     chat_id: int = attr.ib()
     base_url: str = attr.ib(init=False, repr=False)
@@ -34,8 +35,40 @@ class Alerter:
 
         return cls(bot_token=token, chat_id=int(chat_id))
 
-    def send_message(self, chat_id: int, *, text: str, parse_mode: str = None, disable_web_page_preview: bool = True,
-                     disable_notification: bool = False) -> requests.Response:
+    def custom_alert(
+        self,
+        text: str,
+        *,
+        parse_mode: str = None,
+        disable_web_page_preview: bool = True,
+        disable_notification: bool = False,
+    ):
+        """
+        Sends a telegram message to default chat_id. All params according to https://core.telegram.org/bots/api#sendmessage
+
+        :param text: message text
+        :param parse_mode: None, 'MARKDOWN' or 'HTML'
+        :param disable_web_page_preview: no link preview
+        :param disable_notification: send silently
+        :return: requests.Response
+        """
+        return self.send_message(
+            chat_id=self.chat_id,
+            text=text,
+            parse_mode=parse_mode,
+            disable_web_page_preview=disable_web_page_preview,
+            disable_notification=disable_notification,
+        )
+
+    def send_message(
+        self,
+        chat_id: int,
+        *,
+        text: str,
+        parse_mode: str = None,
+        disable_web_page_preview: bool = True,
+        disable_notification: bool = False,
+    ) -> requests.Response:
         """
         Sends a telegram message to `chat_id`. All params according to https://core.telegram.org/bots/api#sendmessage
 
@@ -48,8 +81,13 @@ class Alerter:
         """
         return requests.post(
             self.base_url + "/sendMessage",
-            params={"chat_id": chat_id, "text": text, "parse_mode": parse_mode,
-                    'disable_web_page_preview': disable_web_page_preview, 'disable_notification': disable_notification},
+            params={
+                "chat_id": chat_id,
+                "text": text,
+                "parse_mode": parse_mode,
+                "disable_web_page_preview": disable_web_page_preview,
+                "disable_notification": disable_notification,
+            },
         )
 
     def exception_alert(self, func):
@@ -64,11 +102,7 @@ class Alerter:
             except BaseException as e:
                 text = f"<b>{type(e).__name__}('{e}')</b> in <u>{func.__name__}</u> from <u>{func.__module__}</u>\n\n<pre>{traceback.format_exc()}</pre>"
 
-                self.send_message(
-                    self.chat_id,
-                    text=text,
-                    parse_mode='HTML'
-                )
+                self.send_message(self.chat_id, text=text, parse_mode="HTML")
                 raise
 
         return inner
