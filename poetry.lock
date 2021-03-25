@@ -18,7 +18,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 name = "attrs"
 version = "20.3.0"
 description = "Classes Without Boilerplate"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 
@@ -270,7 +270,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "c48a517a637b9e42a15d18685427dc8f8b463e451b820675b7eeed18dee4360d"
+content-hash = "a590ceb0b7e66735ed64dc852da1041af6561ade4e6b75b9a1b972d10c91b81a"
 
 [metadata.files]
 appdirs = [
