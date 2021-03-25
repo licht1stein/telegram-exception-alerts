@@ -4,34 +4,34 @@ import os
 import traceback
 from functools import wraps
 
-import attr
 import requests
 
 
-@attr.s
 class Alerter:
     """
     Alerter class for sending telegram messages and decorating functions for alerts.
     """
+    def __init__(self, bot_token, chat_id):
+        self.bot_token = bot_token
+        self.chat_id = chat_id
 
-    bot_token: str = attr.ib(repr=False)
-    chat_id: int = attr.ib()
-    base_url: str = attr.ib(init=False, repr=False)
-
-    def __attrs_post_init__(self):
-        self.base_url = f"https://api.telegram.org/bot{self.bot_token}"
+    @property
+    def base_url(self):
+        return f"https://api.telegram.org/bot{self.bot_token}"
 
     @classmethod
     def from_environment(cls) -> Alerter:
         try:
             token: str = os.environ["ALERT_BOT_TOKEN"]
         except KeyError:
-            raise KeyError("ALERT_BOT_TOKEN must be set in environment variables")
+            raise KeyError(
+                "ALERT_BOT_TOKEN must be set in environment variables")
 
         try:
             chat_id = os.environ["ALERT_CHAT_ID"]
         except KeyError:
-            raise KeyError("ALERT_CHAT_ID must be set in environment variables")
+            raise KeyError(
+                "ALERT_CHAT_ID must be set in environment variables")
 
         return cls(bot_token=token, chat_id=int(chat_id))
 
@@ -94,7 +94,6 @@ class Alerter:
         """
         Telegram exception alert decorator. Sends exception details and traceback to self.chat_id and re-raises the exception
         """
-
         @wraps(func)
         def inner(*args, **kwargs):
             try:
