@@ -68,7 +68,7 @@ class Alerter:
         parse_mode: str = None,
         disable_web_page_preview: bool = True,
         disable_notification: bool = False,
-    ) -> requests.Response:
+    ):
         """
         Sends a telegram message to `chat_id`. All params according to https://core.telegram.org/bots/api#sendmessage
 
