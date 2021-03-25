@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "telegram_exception_alerts"
-version = "0.3.0"
+version = "1.0.0"
 description = ""
 authors = ["licht1stein <mb@blaster.ai>"]
 homepage = "https://github.com/licht1stein/telegram-exception-alerts"
@@ -9,7 +9,6 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-requests = "^2.23.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

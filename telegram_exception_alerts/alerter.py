@@ -4,7 +4,7 @@ import os
 import traceback
 from functools import wraps
 
-import requests
+from urllib import request, parse
 
 
 class Alerter:
@@ -79,16 +79,17 @@ class Alerter:
         :param disable_notification: send silently
         :return: requests.Response
         """
-        return requests.post(
-            self.base_url + "/sendMessage",
-            params={
-                "chat_id": chat_id,
-                "text": text,
-                "parse_mode": parse_mode,
-                "disable_web_page_preview": disable_web_page_preview,
-                "disable_notification": disable_notification,
-            },
-        )
+        url = self.base_url + "/sendMessage"
+        params = {
+            "chat_id": chat_id,
+            "text": text,
+            "parse_mode": parse_mode,
+            "disable_web_page_preview": disable_web_page_preview,
+            "disable_notification": disable_notification,
+        }
+        params_data = parse.urlencode(params).encode()
+        req = request.Request(url, method="POST", data=params_data)
+        return request.urlopen(req)
 
     def exception_alert(self, func):
         """

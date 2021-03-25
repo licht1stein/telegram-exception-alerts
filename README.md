@@ -6,7 +6,9 @@
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/telegram-exception-alerts)
 ![PyPI - Downloads](https://img.shields.io/pypi/dw/telegram-exception-alerts)
 
-A very lightweight library for sending exception details to Telegram using a decorator.
+**THIS LIBRARY HAS BEEN EXTENSIVELY TESTED AND IS CONSIDERED VERY STABLE: IT WORKS FINE AND HAS NO EXTERNAL DEPENDENCIES. SO NO FUTURE UPDATES ARE EXPECTED UNLESS I HAVE SOME VERY BRIGHT IDEA ABOUT IT.**
+
+A very lightweight library for sending exception details to Telegram using a decorator. It uses no external dependencies.
 
 ## Installation
 
@@ -20,8 +22,8 @@ poetry add telegram-exception-alerts
 
 ## Usage
 
-After you initialize the alerter instance you can attach the decorator to any function. If it 
-raises an exception information will be send to the chat specified in `chat_id` (don't forget 
+After you initialize the alerter instance you can attach the decorator to any function. If it
+raises an exception information will be send to the chat specified in `chat_id` (don't forget
 that if you want to send notification to a channel you need to prepend that `chat_id` with `-100`).
 
 ### Normal initialization
