@@ -11,9 +11,12 @@ class Alerter:
     """
     Alerter class for sending telegram messages and decorating functions for alerts.
     """
-    def __init__(self, bot_token, chat_id):
+
+    def __init__(self, bot_token, chat_id, blacklist=[], whitelist=[]):
         self.bot_token = bot_token
         self.chat_id = chat_id
+        self.whitelist = whitelist
+        self.blacklist = blacklist
 
     @property
     def base_url(self):
@@ -33,7 +36,15 @@ class Alerter:
             raise KeyError(
                 "ALERT_CHAT_ID must be set in environment variables")
 
-        return cls(bot_token=token, chat_id=int(chat_id))
+        whitelist = os.environ.get("ALERT_BOT_WHITELIST", [])
+        blacklist = os.environ.get("ALERT_BOT_BLACKLIST", [])
+
+        return cls(
+            bot_token=token,
+            chat_id=int(chat_id),
+            blacklist=blacklist,
+            whitelist=whitelist,
+        )
 
     def custom_alert(
         self,
@@ -100,9 +111,17 @@ class Alerter:
             try:
                 return func(*args, **kwargs)
             except BaseException as e:
-                text = f"<b>{type(e).__name__}('{e}')</b> in <u>{func.__name__}</u> from <u>{func.__module__}</u>\n\n<pre>{traceback.format_exc()}</pre>"
+                error_type = type(e).__name__
 
-                self.send_message(self.chat_id, text=text, parse_mode="HTML")
+                # Check if a whitelist exists and if the error_type is in the whitelist, don't send the alert.
+                if self.whitelist and error_type in self.whitelist:
+                    raise
+
+                # Check if a blacklist does not exist or the error_type is in the blacklist, send the alert
+                if not self.blacklist or error_type in self.blacklist:
+                    text = f"<b>{type(e).__name__}('{e}')</b> in <u>{func.__name__}</u> from <u>{func.__module__}</u>\n\n<pre>{traceback.format_exc()}</pre>"
+                    self.send_message(self.chat_id, text=text, parse_mode="HTML")
+
                 raise
 
         return inner
