@@ -60,6 +60,64 @@ Here's what a telegram message from an example above looks like:
 
 <img src="./message_example.png" width="400">
 
+
+### Blacklists and Whitelists
+
+You can use the `blacklist` and `whitelist` parameters of the `Alerter` class to control which errors should be sent to your Telegram channel and which errors should be excluded.
+
+
+#### Blacklist
+
+The `blacklist` parameter allows you to specify which errors should be excluded from the alerts. Any error type present in the `blacklist` will trigger a message to be sent to the Telegram channel.
+
+##### Example
+```python
+from telegram_exception_alerts import Alerter
+
+tg_alert = Alerter(bot_token='YOUR_BOT_TOKEN', chat_id='YOUR_CHAT_ID', blacklist=["ValueError"])
+
+@tg_alert
+def raise_runtime_error():
+    raise RuntimeError('This is a RuntimeError')
+
+```
+
+In the above example, the `RuntimeError` will not be included in the `blacklist`, so a message will not be sent to the Telegram channel when this exception occurs.
+
+
+```python
+from telegram_exception_alerts import Alerter
+
+tg_alert = Alerter(bot_token='YOUR_BOT_TOKEN', chat_id='YOUR_CHAT_ID', blacklist=["ValueError"])
+
+@tg_alert
+def raise_value_error():
+    raise ValueError('This is a ValueError')
+
+```
+
+In the above example, the ValueError is included in the blacklist, so a message will be sent to the Telegram channel when this exception occurs.
+
+
+#### Whitelist
+
+The `whitelist` parameter allows you to specify which errors **should not** be included in the alerts. Only the error types present in the whitelist will not trigger a message to be sent to the Telegram channel.
+
+
+```python
+from telegram_exception_alerts import Alerter
+
+tg_alert = Alerter(bot_token='YOUR_BOT_TOKEN', chat_id='YOUR_CHAT_ID', whitelist=["RuntimeError"])
+
+@tg_alert
+def raise_runtime_error():
+    raise RuntimeError('This is a RuntimeError')
+
+```
+
+In the above example, the `RuntimeError` is included in the `whitelist`, so a message will not be sent to the Telegram channel for this exception. Other exceptions will trigger a message to be sent.
+
+
 ## Sending messages
 You can also use the `Alerter` as a simple way to send messages to Telegram:
 
